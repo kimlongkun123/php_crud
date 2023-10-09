@@ -34,14 +34,15 @@
                     </div>
                     <div class="modal-body">
                         <form method="post">
+                            <input type="hidden" name="code" id="code">
                             <label for="">Title:</label>
-                            <input type="text" name="title" id="" class="form-control my-2" placeholder="Title:">
+                            <input type="text" name="title" id="title" class="form-control my-2" placeholder="Title:">
                             <label for="">Qty:</label>
-                            <input type="number" name="qty" id="" class="form-control my-2" placeholder="Qty:">
+                            <input type="number" name="qty" id="qty" class="form-control my-2" placeholder="Qty:">
                             <label for="">Price:</label>
-                            <input type="text" name="price" id="" class="form-control my-2" placeholder="Price:">
+                            <input type="text" name="price" id="price" class="form-control my-2" placeholder="Price:">
                             <label for="">Discount:</label>
-                            <select name="discount" id="" class="form-select my-2">
+                            <select name="discount" id="discount" class="form-select my-2">
                                 <option value="0">0%</option>
                                 <option value="5">5%</option>
                                 <option value="10">10%</option>
@@ -58,7 +59,30 @@
             </div>
         </div>
     </div>
-    
+
+<!-- Modal Delete -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+            <h3>Are you sure you want to delete? </h3>
+            <input type="text" name="del_code" id="del_code">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+                <button type="submit" name="btn-delete" class="btn btn-danger">Yes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <table class="table table-hover table-dark text-center">
         <tr>
             <th>Code</th>
@@ -81,6 +105,12 @@
             // alert(123);
             $('#update').hide();//display none
             $('#buy').show();// display block
+
+            $('#code').val('');
+            $('#title').val('');
+            $('#qty').val('');
+            $('#price').val('');
+            $('#discount').val(0);
         });
 
 
@@ -88,7 +118,24 @@
             // alert(123);
             $('#update').show();
             $('#buy').hide();
+            var code  = $(this).parents('tr').find('td').eq(0).text();
+            var title = $(this).parents('tr').find('td').eq(1).text();
+            var qty   = $(this).parents('tr').find('td').eq(2).text();
+            var price = $(this).parents('tr').find('td').eq(3).text();
+            var dis   = $(this).parents('tr').find('td').eq(4).text();
+
+            // alert(code+title+qty+price+dis);
+            $('#code').val(code);
+            $('#title').val(title);
+            $('#qty').val(qty);
+            $('#price').val(price);
+            $('#discount').val(dis);
         });
+
+        $('body').on('click','#btn-open-delete',function(){
+            var code  = $(this).parents('tr').find('td').eq(0).text();
+            $('#del_code').val(code);
+        })  
 
     });
 </script>
