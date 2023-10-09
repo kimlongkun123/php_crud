@@ -127,16 +127,7 @@
     delete();
     
 
-// Homework
-    id
-    name
-    gender
-    score1
-    score2
-    score3
-    total
-    average
-    grade
+
 
 
 
